@@ -7,275 +7,392 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon-180.png">
-<meta name="theme-color" content="#FBF6EC">
+<meta name="theme-color" content="#FFF9F1">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%}
 body{
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue","Segoe UI",sans-serif;
-  background:#FBF6EC;
-  background-image:radial-gradient(#E9DFCB 1.05px,transparent 1.05px);
-  background-size:24px 24px;
-  color:#2E2A24;line-height:1.8;letter-spacing:.01em;padding-bottom:70px;
+  background:#FFF9F1;
+  background-image:radial-gradient(#E8DFD2 1px,transparent 1px);
+  background-size:26px 26px;
+  color:#2E2A24;line-height:1.8;letter-spacing:.01em;
+  min-height:100vh;overflow-x:hidden;
 }
-.wrap{max-width:520px;margin:0 auto;padding:0 18px}
 .up-en{font-family:"Courier New",Courier,monospace;letter-spacing:.09em}
 .up-kai{font-family:"Kaiti SC","STKaiti","KaiTi","楷体","PingFang SC",serif}
-/* ===== hero ===== */
-.up-hero{padding:34px 0 20px;text-align:center}
-.up-todo{font-weight:900;font-size:30px;letter-spacing:.04em;line-height:1.3}
-.up-todo .strike{position:relative;color:#C9BFAD;white-space:nowrap}
-.up-todo .strike::after{content:"";position:absolute;left:-3%;right:-3%;top:52%;height:3.5px;background:#E2843B;border-radius:3px;transform:rotate(-2.5deg)}
-.up-todo .feel{color:#2E2A24}
-.up-todo .arrow{color:#B9AE9A;font-weight:400;margin:0 6px}
-.up-hero .zh{margin-top:14px;font-size:17px;color:#4A443B}
-.up-hero .zh b{color:#E2843B;font-weight:600}
-.up-hero .en{margin-top:4px;font-size:11.5px;color:#A79C87;text-transform:lowercase}
-.up-hero .brand{margin-top:18px;font-size:12px;color:#8A7F6C;letter-spacing:.2em}
-/* ===== 日期条 ===== */
-.up-datebar{display:flex;align-items:center;justify-content:center;gap:14px;margin:8px 0 22px}
-.up-nav{width:38px;height:38px;border-radius:50% 46% 52% 48%/48% 52% 46% 54%;border:2px solid #2E2A24;background:#FFFDF7;font-size:17px;color:#2E2A24;font-family:inherit;cursor:pointer}
-.up-nav:active{transform:scale(.92)}
-.up-dbox{text-align:center;min-width:118px}
-.up-dbox .d{font-size:23px;font-weight:800;letter-spacing:.03em}
-.up-dbox .w{font-size:11px;color:#8A7F6C;margin-top:-3px}
-.up-dbox .w.today-tag{color:#E2843B}
-/* ===== 贴纸模块 ===== */
-.up-board{display:flex;flex-direction:column;gap:26px}
-/* 首次引导 */
-.up-firsttip{
-  text-align:center;font-size:15px;color:#7A6F5D;margin:2px 0 12px;line-height:1.7;
-  animation:tipin .5s;transition:opacity .55s
+.wrap{max-width:480px;margin:0 auto;padding:0 20px}
+img{display:block;max-width:100%}
+
+/* ============ 封面（合上的本子） ============ */
+.up-stage{perspective:1400px;position:relative}
+.up-cover{
+  position:relative;z-index:5;cursor:pointer;
+  min-height:92vh;display:flex;flex-direction:column;justify-content:space-between;
+  padding:52px 30px 44px;
+  background:linear-gradient(135deg,#F5722E 0%,#F37021 42%,#E8611B 100%);
+  color:#FFF9F1;border-radius:6px 14px 14px 6px;
+  box-shadow:inset -14px 0 26px rgba(120,50,0,.18),0 14px 34px rgba(120,60,20,.28);
+  transform-origin:left center;
+  transition:transform .85s cubic-bezier(.6,.05,.3,1),opacity .5s .25s;
 }
-.up-firsttip span{font-size:12px;color:#B3A78F}
-.up-firsttip.go{opacity:0}
-@keyframes tipin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.up-st{background:#FFFDF7;padding:9px;border-radius:5px;
-  box-shadow:0 1px 2px rgba(80,70,50,.08),0 6px 16px rgba(80,70,50,.10);
-  border:3px solid #FFFDF7;outline:1px solid rgba(46,42,36,.06);
-  position:relative;transition:transform .25s}
-.up-st .in{position:relative;border-radius:2px;overflow:hidden}
-.up-st img{display:block;width:100%;height:auto}
-.up-st .layer{position:absolute;left:0;top:0;right:0;bottom:0}
-/* 贴纸错落 */
-.up-st.today{width:100%;transform:rotate(-.6deg)}
-.up-st.slow{width:64%;margin-right:auto;transform:rotate(1.1deg)}
-.up-st.think{width:84%;margin-left:auto;transform:rotate(.7deg)}
-.up-st.see{width:66%;margin-right:auto;transform:rotate(-1deg)}
-.up-st.bling{width:100%;transform:rotate(-.45deg)}
-.up-st.mood{width:70%;margin:6px auto 0;transform:rotate(.4deg)}
-/* 输入 */
-.up-f{
-  position:absolute;width:100%;height:100%;resize:none;border:0;outline:0;background:transparent;
+.up-cover::before{ /* 线圈 */
+  content:"";position:absolute;left:-11px;top:60px;bottom:60px;width:22px;
+  background:radial-gradient(circle at 11px 11px,#FBF6EC 5.5px,rgba(0,0,0,0) 6.5px);
+  background-size:22px 46px;background-repeat:repeat-y;
+}
+.up-cover::after{ /* 纸纹噪点 */
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:5px 5px;mix-blend-mode:overlay;
+}
+.up-stage.open .up-cover{transform:rotateY(-112deg);opacity:0;pointer-events:none}
+.up-cov-slog{font-size:15px;opacity:.92;line-height:1.9;font-weight:500}
+.up-cov-mid{margin:18px 0}
+.up-cov-title-en{font-size:34px;font-weight:800;letter-spacing:.045em;line-height:1.22;text-shadow:0 2px 0 rgba(140,60,0,.2)}
+.up-cov-title-zh{font-size:21px;margin-top:10px;opacity:.95}
+.up-cov-strike{font-size:14.5px;margin-top:16px;color:#FFEBD8}
+.up-cov-strike s{opacity:.75}
+.up-cov-strike .to{margin:0 7px;font-weight:700}
+.up-cov-open{
+  align-self:flex-start;display:flex;align-items:center;gap:8px;
+  font-size:16px;font-weight:600;color:#F37021;background:#FFF9F1;
+  padding:11px 22px;border-radius:999px;
+  box-shadow:0 3px 0 rgba(140,60,0,.35);
+  animation:bob 2.6s ease-in-out infinite;
+}
+.up-cov-open .ar{font-size:18px;animation:nud 2.6s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes nud{0%,100%{transform:translateX(0)}50%{transform:translateX(5px)}}
+.up-cov-foot{font-size:12px;opacity:.62;margin-top:14px}
+/* 桌面氛围（封面后面的官图） */
+.up-desk{position:relative;min-height:92vh;margin-top:-92vh;padding-top:64px}
+.up-desk-photo{border-radius:8px;overflow:hidden;box-shadow:0 10px 26px rgba(80,70,50,.16);
+  transform:rotate(1.6deg);opacity:0;transition:opacity .5s .45s}
+.up-stage.open .up-desk-photo{opacity:1}
+.up-desk-cap{text-align:center;font-size:13px;color:#9A8E78;margin:14px 0 6px;opacity:0;transition:opacity .5s .6s}
+.up-stage.open .up-desk-cap{opacity:1}
+
+/* ============ 本子（翻开后） ============ */
+.up-book{display:none;position:relative;z-index:2;padding:20px 0 30px}
+.up-stage.open .up-book{display:block;animation:bookin .55s .18s both}
+@keyframes bookin{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+/* 装订+纸页 */
+.up-paper{
+  background:#E9F0E3;
+  border-radius:6px 16px 16px 6px;
+  box-shadow:0 2px 4px rgba(80,70,50,.10),0 16px 34px rgba(80,70,50,.15);
+  position:relative;padding:24px 20px 30px 30px;
+}
+.up-paper::before{
+  content:"";position:absolute;left:-10px;top:54px;bottom:54px;width:20px;
+  background:radial-gradient(circle at 10px 10px,#FBF6EC 4.5px,rgba(0,0,0,0) 5.5px);
+  background-size:20px 46px;background-repeat:repeat-y;
+}
+.up-paper::after{ /* 纸纹 */
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(rgba(255,255,255,.4) 1px,transparent 1px);
+  background-size:22px 22px;
+}
+/* 日期条 */
+.up-dbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;position:relative;z-index:3}
+.up-nav{width:44px;height:44px;border-radius:50%;border:2.5px solid #2E2A24;background:#FBF6EC;
+  font-size:19px;cursor:pointer;line-height:1;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 0 rgba(46,42,36,.25);transform:rotate(-1.2deg);color:#2E2A24}
+.up-nav:active{transform:rotate(-1.2deg) translateY(2px);box-shadow:0 0 0 rgba(0,0,0,0)}
+.up-nav.r{transform:rotate(1.2deg)}
+.up-nav.r:active{transform:rotate(1.2deg) translateY(2px)}
+.up-dbox{text-align:center;background:#FBF6EC;border:2.5px solid #2E2A24;border-radius:14px;
+  padding:4px 20px;transform:rotate(-.6deg);box-shadow:0 2px 0 rgba(46,42,36,.2);cursor:pointer;min-width:132px}
+.up-dbox .d{font-size:22px;font-weight:800;letter-spacing:.03em}
+.up-dbox .w{font-size:10.5px;color:#8A7F6C;margin-top:-4px}
+.up-dbox .w.tg{color:#E2843B;font-weight:700}
+
+/* ===== 六模块 ===== */
+.up-mods{display:flex;flex-direction:column;gap:26px;position:relative;z-index:3}
+.up-mod{position:relative;color:#33302A}
+.up-mod .lbl{margin-bottom:6px;line-height:1.45}
+.up-mod .lbl .cn{font-size:16.5px;font-weight:700}
+.up-mod .lbl .en{font-size:11px;color:#8A7F6C;margin-left:7px;letter-spacing:.1em}
+.up-mod .lbl .hint{font-size:12px;color:#7A9A6F;margin-top:2px;font-weight:400}
+.up-ta{
+  width:100%;border:0;outline:0;background:transparent;resize:none;overflow:hidden;
   font-family:"Kaiti SC","STKaiti","KaiTi","楷体","PingFang SC",serif;
-  font-size:16px;line-height:1.7;color:#33302A;padding:6px 8px;caret-color:#E2843B;overflow:hidden;
+  font-size:16px;line-height:1.75;color:#33302A;padding:10px 12px;caret-color:#E2843B;
 }
-.up-f::placeholder{color:rgba(90,82,68,.42)}
-.up-st.focuson{transform:rotate(0) scale(1.012)!important;
-  box-shadow:0 2px 3px rgba(80,70,50,.10),0 10px 22px rgba(80,70,50,.14)}
-.up-st.focuson .up-f{background:rgba(255,222,150,.16);border-radius:4px}
-/* mood 圈选 */
-.up-m{position:absolute;width:33.4%;height:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:transparent;border:0}
-.up-m .ring{width:74%;padding-top:74%;position:relative;opacity:0;transform:scale(.7) rotate(-4deg);transition:all .18s}
-.up-m.on .ring{opacity:1;transform:scale(1) rotate(-4deg)}
-.up-m .ring::before{content:"";position:absolute;inset:-6% -9%;border:3px solid #E2843B;border-radius:52% 48% 50% 54%/62% 58% 64% 60%;filter:drop-shadow(0 0 1px rgba(226,132,59,.3))}
-.up-m:active{transform:scale(.94)}
-/* 空页提示 */
-.up-emptyhint{text-align:center;margin:-6px 0 24px;font-size:14.5px;color:#A79C87;letter-spacing:.1em;transition:opacity .3s}
-.up-emptyhint.off{opacity:0;height:0;margin:0;overflow:hidden}
+.up-ta::placeholder{color:rgba(100,110,85,.36)}
+/* 手绘框形 */
+.up-box{background:rgba(255,255,255,.34)}
+.up-box-rect{border:2.5px solid #2E2A24;border-radius:255px 18px 235px 20px/19px 225px 17px 255px}
+.up-box-slow{border:2.5px solid #2E2A24;border-radius:180px 26px 210px 30px/30px 190px 24px 200px;transform:rotate(-.7deg)}
+.up-box-see{border:2.5px solid #2E2A24;border-radius:50% 44% 48% 52%/46% 52% 44% 50%;transform:rotate(.5deg)}
+.up-box-think{border:2.5px solid #2E2A24;border-radius:36px 8px 30px 12px/12px 32px 9px 28px;transform:rotate(-.9deg);position:relative}
+.up-box-think::before{content:"✦";position:absolute;right:-4px;top:-20px;color:#E2843B;font-size:15px;transform:rotate(14deg)}
+.up-box-think::after{content:"✦";position:absolute;left:-2px;bottom:-18px;color:#E2843B;font-size:12px;opacity:.8}
+.up-box-bling{border:2.5px solid #2E2A24;border-radius:14px 220px 18px 235px/240px 16px 230px 20px;transform:rotate(-.5deg)}
+/* 模块尺寸节奏 */
+.up-m-today .up-ta{min-height:128px}
+.up-m-slow .up-ta{min-height:58px}
+.up-m-see .up-ta{min-height:86px}
+.up-m-think .up-ta{min-height:74px}
+.up-m-bling .up-ta{min-height:74px}
+/* 聚焦态 */
+.up-mod.focuson .up-box{background:rgba(255,244,196,.5);transition:background .25s}
+.up-mod.focuson .lbl .cn{color:#D9691E}
+/* 情绪格 */
+.up-moodrow{display:flex;flex-wrap:wrap;justify-content:space-between;background:rgba(255,255,255,.34);
+  border:2.5px solid #2E2A24;border-radius:220px 16px 235px 18px/18px 230px 16px 240px;padding:12px 10px 10px;gap:4px}
+.up-m{position:relative;width:31%;background:transparent;border:0;cursor:pointer;padding:4px 0 2px;text-align:center}
+.up-m .f{font-size:29px;display:block;filter:grayscale(.22)}
+.up-m .l{font-size:11px;color:#7A9A6F;display:block;margin-top:1px}
+.up-m .ring{position:absolute;left:50%;top:16px;transform:translateX(-52%) rotate(-5deg);width:46px;height:32px;
+  border:3px solid #E2843B;border-radius:52% 48% 55% 50%/58% 46% 60% 48%;opacity:0;transition:opacity .16s,transform .16s;pointer-events:none}
+.up-m.on .ring{opacity:1}
+.up-m.on .f{filter:none}
+.up-m.on .l{color:#D9691E}
+/* 空页哲学 */
+.up-emptyhint{text-align:center;color:#7A9A6F;font-size:13px;padding:4px 0 2px;opacity:.85}
+.up-emptyhint.off{display:none}
 /* 已存浮标 */
-.up-saved{position:fixed;right:18px;bottom:24px;background:#FFFDF7;border:2px solid #2E2A24;border-radius:22px;
-  padding:6px 15px;font-size:12.5px;color:#2E2A24;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;z-index:9}
-.up-saved.on{opacity:1;transform:none}
-.up-saved .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#7FA98C;margin-right:6px}
+.up-saved{
+  position:fixed;right:18px;bottom:24px;z-index:60;
+  background:#FBF6EC;border:2.5px solid #2E2A24;border-radius:999px;
+  padding:7px 16px;font-size:13px;font-weight:600;box-shadow:0 3px 0 rgba(46,42,36,.22);
+  opacity:0;transform:translateY(8px) rotate(-1deg);transition:all .3s;pointer-events:none}
+.up-saved.on{opacity:1;transform:translateY(0) rotate(-1deg)}
+/* 合上本子 */
+.up-shut{margin:16px auto 0;display:block;background:#FBF6EC;border:2.5px solid #2E2A24;border-radius:999px;
+  padding:9px 20px;font-size:14px;cursor:pointer;box-shadow:0 2px 0 rgba(46,42,36,.25);transform:rotate(-.8deg);color:#2E2A24}
+
 /* 以前的日子 */
-.up-past{margin-top:44px}
-.up-past h2,.up-sec h2{font-size:15px;font-weight:700;letter-spacing:.06em;text-align:center;color:#2E2A24;margin-bottom:14px}
-.up-sec h2 small{display:block;font-size:11px;color:#A79C87;font-weight:400;letter-spacing:.18em;margin-top:2px;font-family:"Courier New",monospace}
-.up-past-list{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
-.up-past-item{border:2px solid #2E2A24;border-radius:999px;background:#FFFDF7;padding:5px 14px 5px 11px;font-size:13px;cursor:pointer;font-family:inherit;color:#2E2A24}
-.up-past-item .pv{margin-left:7px;color:#A79C87;font-size:11.5px}
-.up-past-item:active{transform:scale(.95)}
-/* 关于 */
-.up-sec{margin-top:44px}
-.up-sec .note{margin:36px 0 8px;text-align:center;font-size:14px;color:#8A7F6C}
-.up-about{background:#FFFDF7;padding:9px;border:3px solid #FFFDF7;outline:1px solid rgba(46,42,36,.06);box-shadow:0 6px 16px rgba(80,70,50,.10);border-radius:5px;transform:rotate(-.3deg)}
-.up-about img{width:100%;height:auto;display:block}
-.up-about img+img{margin-top:8px}
-/* footer */
-.up-foot{margin-top:46px;text-align:center}
-.up-foot .en{font-size:12.5px;color:#8A7F6C;line-height:2}
-.up-foot .zh{margin-top:8px;font-size:12px;color:#B9AE9A}
-.up-philosophy{margin-top:18px;font-size:13px;color:#8A7F6C;text-align:center}
-.up-philosophy b{color:#E2843B}
+.up-past{margin-top:34px}
+.up-past h3{font-size:15px;color:#2E2A24;font-weight:700}
+.up-past h3 small{font-weight:400;color:#9A8E78;font-size:11px;margin-left:8px;letter-spacing:.08em}
+.up-past-list{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px}
+.up-past-item{
+  background:#FBF6EC;border:2px solid #2E2A24;border-radius:12px 4px 14px 5px;
+  padding:7px 13px;font-size:14px;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;
+  box-shadow:0 2px 0 rgba(46,42,36,.18);transform:rotate(-.8deg);color:#2E2A24;line-height:1.5}
+.up-past-item:nth-child(2n){transform:rotate(1deg)}
+.up-past-item:nth-child(3n){transform:rotate(-.4deg)}
+.up-past-item .pv{font-size:11px;color:#8A7F6C;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* 关于（官图原样） */
+.up-about{margin-top:40px}
+.up-about h3{font-size:15px;font-weight:700}
+.up-about h3 small{font-weight:400;color:#9A8E78;font-size:11px;margin-left:8px;letter-spacing:.08em}
+.up-about .sub{font-size:12.5px;color:#8A7F6C;margin-top:2px}
+.up-about-ph{margin-top:14px;display:flex;flex-direction:column;gap:12px}
+.up-about-ph img{border-radius:6px;box-shadow:0 6px 18px rgba(80,70,50,.13)}
+
+.up-foot{margin:44px 0 26px;text-align:center}
+.up-foot .q1{font-size:14px;color:#7A9A6F;letter-spacing:.03em}
+.up-foot .q2{font-size:12px;color:#B3A78F;font-family:"Courier New",monospace;margin-top:4px;letter-spacing:.1em}
+.up-foot .ver{font-size:11px;color:#C9BEA8;margin-top:14px}
 </style>
 </head>
 <body>
 <div class="wrap">
-
-  <section class="up-hero">
-    <div class="up-todo">
-      <span class="strike">TO DO</span><span class="arrow">→</span><br>
-      <span class="feel">TO FEEL</span>
+  <div class="up-stage" id="upStage">
+    <!-- 封面 -->
+    <div class="up-cover" id="upCover" role="button" aria-label="翻开手册">
+      <div class="up-cov-slog up-kai">有些事情可以<b>等一等</b>；<br>有些事情自然地发生，<b>就已经足够</b>。</div>
+      <div class="up-cov-mid">
+        <div class="up-cov-title-en up-en">THE<br>UNPRODUCTIVE<br>PLANNER</div>
+        <div class="up-cov-title-zh up-kai">非 效 率 手 册</div>
+        <div class="up-cov-strike up-en">TO <s>DO</s><span class="to">→</span><b>TO FEEL</b></div>
+      </div>
+      <div>
+        <div class="up-cov-open" id="upOpenBtn">翻开这本手册 <span class="ar">↦</span></div>
+        <div class="up-cov-foot up-en">no to-dos · no progress bars · no completion rates</div>
+      </div>
     </div>
-    <div class="zh up-kai">有些事情可以等一等；<br>有些事情自然地发生，就已经足够。</div>
-    <div class="en up-en">some things can wait. some are already enough.</div>
-    <div class="brand up-en">— THE UNPRODUCTIVE PLANNER —</div>
-  </section>
 
-  <div class="up-datebar">
-    <button class="up-nav" id="upPrev" aria-label="前一天">‹</button>
-    <div class="up-dbox" id="upDate" role="button" tabindex="0">
-      <div class="d" id="upD">—</div>
-      <div class="w up-en" id="upW">—</div>
+    <!-- 本体 -->
+    <div class="up-book">
+      <div class="up-paper">
+        <div class="up-dbar">
+          <button class="up-nav" id="upPrev" aria-label="前一天">‹</button>
+          <div class="up-dbox" id="upDate" role="button" aria-label="回到今天">
+            <div class="d" id="upD">·</div>
+            <div class="w" id="upW">·</div>
+          </div>
+          <button class="up-nav r" id="upNext" aria-label="后一天">›</button>
+        </div>
+        <div class="up-emptyhint up-kai" id="upEmptyHint">空着，也是一种使用 ✓&nbsp;&nbsp;写下第一个字，它就属于你</div>
+        <div class="up-mods" id="upMods">
+          <div class="up-mod up-m-today" data-f="t">
+            <div class="lbl"><span class="cn up-kai">嗯，今天</span><span class="en">TODAY</span>
+              <div class="hint">今天发生了什么？写字，画画，或空着。</div></div>
+            <div class="up-box up-box-rect"><textarea class="up-ta" id="f-t" placeholder="嗯，今天……"></textarea></div>
+          </div>
+          <div class="up-mod up-m-slow" data-f="sd">
+            <div class="lbl"><span class="cn up-kai">不着急</span><span class="en">SLOW DOWN</span>
+              <div class="hint">提醒自己，允许一些事情慢慢来。先放一放，晚点再做也可以。</div></div>
+            <div class="up-box up-box-slow"><textarea class="up-ta" id="f-sd" rows="1" placeholder="先放一放……"></textarea></div>
+          </div>
+          <div class="up-mod up-m-think" data-f="th">
+            <div class="lbl"><span class="cn up-kai">一个念头</span><span class="en">I THINK</span>
+              <div class="hint">收留突然出现的想法。不要熄灭内心莫名冒出来的感动。</div></div>
+            <div class="up-box up-box-think"><textarea class="up-ta" id="f-th" rows="2" placeholder="刚才好像想到……"></textarea></div>
+          </div>
+          <div class="up-mod up-m-see" data-f="see">
+            <div class="lbl"><span class="cn up-kai">我看到</span><span class="en">I SEE</span>
+              <div class="hint">记录今天真正留意到的东西。把发生在我眼前的，好好留下来。</div></div>
+            <div class="up-box up-box-see"><textarea class="up-ta" id="f-see" rows="2" placeholder="留意到……"></textarea></div>
+          </div>
+          <div class="up-mod up-m-bling" data-f="bl">
+            <div class="lbl"><span class="cn up-kai">小瞬间 ✨</span><span class="en">A LITTLE BLING</span>
+              <div class="hint">留下微小但值得记住的瞬间。点亮我的。</div></div>
+            <div class="up-box up-box-bling"><textarea class="up-ta" id="f-bl" rows="2" placeholder="很小，但记住了……"></textarea></div>
+          </div>
+          <div class="up-mod up-m-mood">
+            <div class="lbl"><span class="cn up-kai">今天是什么心情？</span><span class="en">MOOD</span>
+              <div class="hint">不用解释太多，圈出来就好。</div></div>
+            <div class="up-moodrow" id="upMoodBox"></div>
+          </div>
+        </div>
+      </div>
+      <button class="up-shut" id="upShut">合上本子，歇一会儿</button>
+
+      <!-- 以前的日子 -->
+      <div class="up-past" id="upPast" style="display:none">
+        <h3>以前的日子 <small>THE DAYS BEFORE</small></h3>
+        <div class="up-past-list" id="upPastList"></div>
+      </div>
+
+      <!-- 关于：官图 -->
+      <div class="up-about">
+        <h3>关于这本手册 <small>THE STORY</small></h3>
+        <div class="sub">它不负责提高效率，只希望让今天被真正经历。</div>
+        <div class="up-about-ph">
+          <img src="img/1378.webp" alt="品牌故事" width="770" height="1080">
+          <img src="img/1379.webp" alt="如何使用" width="1080" height="934">
+        </div>
+      </div>
+
+      <footer class="up-foot">
+        <div class="q1 up-kai">它不负责提高效率，只希望让今天被真正经历。</div>
+        <div class="q2">some things can wait. some are already enough.</div>
+        <div class="ver up-en">unproductive. — a web notebook, no to-dos</div>
+      </footer>
     </div>
-    <button class="up-nav" id="upNext" aria-label="后一天">›</button>
   </div>
-
-  <div class="up-emptyhint up-kai" id="upEmptyHint">空着也是一种使用 ✓</div>
-
-  <div class="up-board" id="upBoard">
-    <div class="up-st today"><div class="in"><img src="img/m-today.webp" alt="嗯，今天">
-      <div class="layer"><textarea class="up-f" id="f-t" placeholder="今天发生了什么……"></textarea></div></div></div>
-
-    <div class="up-st slow"><div class="in"><img src="img/m-slow.webp" alt="不着急">
-      <div class="layer"><textarea class="up-f" id="f-sd" placeholder="先放一放……"></textarea></div></div></div>
-
-    <div class="up-st think"><div class="in"><img src="img/m-think.webp" alt="一个念头">
-      <div class="layer"><textarea class="up-f" id="f-th" placeholder="冒出来的念头……"></textarea></div></div></div>
-
-    <div class="up-st see"><div class="in"><img src="img/m-see.webp" alt="我看到">
-      <div class="layer"><textarea class="up-f" id="f-see" placeholder="今天留意到……"></textarea></div></div></div>
-
-    <div class="up-st bling"><div class="in"><img src="img/m-bling.webp" alt="小瞬间">
-      <div class="layer"><textarea class="up-f" id="f-bl" placeholder="微小但值得记住的……"></textarea></div></div></div>
-
-    <div class="up-st mood"><div class="in"><img src="img/m-mood.webp" alt="今天是什么心情">
-      <div class="layer"><div id="upMoodBox" style="position:absolute;left:0;top:0;right:0;bottom:0"></div></div></div></div>
-  </div>
-
-  <section class="up-past" id="upPast" style="display:none">
-    <h2>以前的日子 <small class="up-en">DAYS THAT HAPPENED</small></h2>
-    <div class="up-past-list" id="upPastList"></div>
-  </section>
-
-  <section class="up-sec">
-    <h2>关于这本手册 <small>THE STORY //</small></h2>
-    <div class="up-about">
-      <img src="img/1380.webp" alt="每一页的组成" width="1080" height="546">
-      <img src="img/1379.webp" alt="如何使用" width="1080" height="934">
-    </div>
-    <div class="note up-kai">一本「非效率手册」，当然允许你没有效率地使用它。</div>
-  </section>
-
-  <footer class="up-foot">
-    <div class="en up-en">some things can wait.<br>some are already enough.</div>
-    <div class="zh up-kai">它不负责提高效率，只希望让今天被真正经历。</div>
-    <div class="up-philosophy up-kai">没有待办 · 没有打卡 · 没有完成率 · <b>空着也是一页</b></div>
-  </footer>
-
 </div>
-<div class="up-saved" id="upSaved"><span class="dot"></span>已存好</div>
+
+<div class="up-saved" id="upSaved">已存好 ✓</div>
 <script>
 (function(){
 var MOODS=[{f:"😊",l:"开心"},{f:"😌",l:"平静"},{f:"🥲",l:"鼻酸"},{f:"😴",l:"想歇"},{f:"😤",l:"有点烦"},{f:"✨",l:"被点亮"}];
-/* 各贴纸书写区（贴纸内 norm 坐标，x,y,w,h） */
-var GEO={
-  t:  [0.415,0.352,0.233,0.341],
-  sd: [0.15,0.42,0.7,0.42],
-  th: [0.18,0.13,0.698,0.726],
-  see:[0.238,0.192,0.645,0.555],
-  bl: [0.193,0.072,0.711,0.847],
-  mood:[0.161,0.187,0.735,0.657]
-};
 var FIELDS=["t","sd","th","see","bl"];
 var FID={t:"f-t",sd:"f-sd",th:"f-th",see:"f-see",bl:"f-bl"};
 var WK=["SUN","MON","TUE","WED","THU","FRI","SAT"];
 var cur=today();
+var LS="unprod_";
+var stage=document.getElementById("upStage");
+
 function pad(n){return (n<10?"0":"")+n}
 function today(){var d=new Date();return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
-function prevDay(s){var p=s.split("-");var d=new Date(+p[0],+p[1]-1,+p[2]-1);return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
-function nextDay(s){var p=s.split("-");var d=new Date(+p[0],+p[1]-1,+p[2]+1);return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
-function load(d){try{return JSON.parse(localStorage.getItem("unprod_"+d))||{}}catch(e){return{}}}
-function save(d,o){localStorage.setItem("unprod_"+d,JSON.stringify(o))}
-function hasContent(o){return FIELDS.some(function(f){return (o[f]||"").trim()})||(o.mo&&o.mo.length)}
-/* 布局输入区 */
-Object.keys(GEO).forEach(function(k){
-  if(k==="mood")return;
-  var el=document.getElementById(FID[k]),g=GEO[k],p=el.parentElement;
-  el.style.left=(g[0]*100)+"%";el.style.top=(g[1]*100)+"%";
-  el.style.width=(g[2]*100)+"%";el.style.height=(g[3]*100)+"%";
-});
-/* mood 点阵 */
-var mbox=document.getElementById("upMoodBox"),mg=GEO.mood;
-MOODS.forEach(function(m,i){
-  var b=document.createElement("button");
-  b.className="up-m";b.type="button";b.setAttribute("data-i",i);
-  var col=i%3,row=Math.floor(i/3);
-  b.style.left=((mg[0]+col*mg[2]/3)*100)+"%";
-  b.style.top=((mg[1]+row*mg[3]/2)*100)+"%";
-  b.style.width=((mg[2]/3)*100)+"%";b.style.height=((mg[3]/2)*100)+"%";
-  b.setAttribute("aria-label",m.l);
-  b.innerHTML='<div class="ring"></div>';
-  b.addEventListener("click",function(ev){
-    ev.preventDefault();
-    var o=load(cur);o.mo=o.mo||[];
-    var idx=o.mo.indexOf(i);
-    if(idx>=0)o.mo.splice(idx,1);else o.mo.push(i);
-    save(cur,o);updateMood(o.mo);refreshEmpty();flashSaved();
-  });
-  mbox.appendChild(b);
-});
-function updateMood(mo){
-  document.querySelectorAll(".up-m").forEach(function(s,i){
-    s.classList.toggle("on",(mo||[]).indexOf(i)>=0)
-  });
+function key(d){return LS+d}
+function load(d){try{return JSON.parse(localStorage.getItem(key(d)))||{}}catch(e){return {}}}
+function save(d,o){localStorage.setItem(key(d),JSON.stringify(o))}
+function hasContent(o){
+  return FIELDS.some(function(f){return (o[f]||"").trim()})||((o.mo||[]).length>0);
 }
-function refreshEmpty(){
-  var o=load(cur);
-  document.getElementById("upEmptyHint").classList.toggle("off",hasContent(o));
+/* 封面翻开/合上 */
+function openBook(){stage.classList.add("open")}
+function shutBook(){
+  stage.classList.remove("open");
+  window.scrollTo({top:0,behavior:"smooth"});
 }
+document.getElementById("upCover").addEventListener("click",openBook);
+document.getElementById("upOpenBtn").addEventListener("click",function(e){e.stopPropagation();openBook()});
+document.getElementById("upShut").addEventListener("click",shutBook);
+
+/* 自动存 */
 var deb=null;
 function persist(){
   var o=load(cur);
   FIELDS.forEach(function(f){o[f]=document.getElementById(FID[f]).value});
   save(cur,o);renderPast();
 }
+function flashSaved(){
+  var s=document.getElementById("upSaved");
+  s.classList.add("on");clearTimeout(s._t);
+  s._t=setTimeout(function(){s.classList.remove("on")},1600);
+}
+function autoTa(el){
+  function h(){el.style.height="auto";el.style.height=Math.max(el.scrollHeight,el.dataset.mh||44)+"px"}
+  el.dataset.mh=(el.parentElement&&getComputedStyle(el).minHeight)||"44px";
+  el.addEventListener("input",h);setTimeout(h,60);
+}
 FIELDS.forEach(function(f){
   var el=document.getElementById(FID[f]);
+  autoTa(el);
   el.addEventListener("input",function(){
     clearTimeout(deb);
     deb=setTimeout(function(){persist();flashSaved()},500);
   });
   el.addEventListener("focus",function(){
-    el.closest(".up-st").classList.add("focuson");
-    setTimeout(function(){el.scrollIntoView({block:"center",behavior:"smooth"})},320);
+    var m=el.closest(".up-mod");if(m)m.classList.add("focuson");
+    setTimeout(function(){el.scrollIntoView({block:"center",behavior:"smooth"})},340);
   });
   el.addEventListener("blur",function(){
-    el.closest(".up-st").classList.remove("focuson");
+    var m=el.closest(".up-mod");if(m)m.classList.remove("focuson");
   });
 });
-function flashSaved(){
-  var s=document.getElementById("upSaved");
-  s.classList.add("on");clearTimeout(s._t);
-  s._t=setTimeout(function(){s.classList.remove("on")},1400);
+/* 情绪格 */
+var MOODS_EL=[];
+(function(){
+  var box=document.getElementById("upMoodBox");
+  MOODS.forEach(function(m,i){
+    var b=document.createElement("button");b.className="up-m";b.type="button";
+    b.innerHTML='<span class="f">'+m.f+'</span><span class="l">'+m.l+'</span><div class="ring"></div>';
+    b.setAttribute("aria-label",m.l);
+    b.addEventListener("click",function(ev){
+      ev.preventDefault();
+      var o=load(cur);o.mo=o.mo||[];
+      var idx=o.mo.indexOf(i);
+      if(idx>=0)o.mo.splice(idx,1);else o.mo.push(i);
+      save(cur,o);
+      updateMood(o.mo);refreshEmpty();flashSaved();
+    });
+    box.appendChild(b);MOODS_EL.push(b);
+  });
+})();
+function updateMood(mo){
+  MOODS_EL.forEach(function(s,i){s.classList.toggle("on",(mo||[]).indexOf(i)>=0)});
 }
+function refreshEmpty(){
+  var o=load(cur);
+  document.getElementById("upEmptyHint").classList.toggle("off",hasContent(o));
+}
+/* 翻日 */
 function fill(){
   var o=load(cur);
   FIELDS.forEach(function(f){document.getElementById(FID[f]).value=o[f]||""});
   updateMood(o.mo);refreshEmpty();
   var parts=cur.split("-"),dd=new Date(+parts[0],+parts[1]-1,+parts[2]);
-  document.getElementById("upD").textContent=(+parts[1])+"."+(+parts[2]);
+  document.getElementById("upD").textContent=(+parts[1])+"."+parts[2];
   var w=document.getElementById("upW");
   w.textContent=WK[dd.getDay()];
-  w.classList.toggle("today-tag",cur===today());
+  w.classList.toggle("tg",cur===today());
+  FIELDS.forEach(function(f){var el=document.getElementById(FID[f]);setTimeout(function(){el.style.height="auto";el.style.height=Math.max(el.scrollHeight,el.dataset.mh||44)+"px"},30)});
+  renderPast();
 }
-function go(d){cur=d;fill();window.scrollTo({top:0,behavior:"auto"})}
-document.getElementById("upPrev").addEventListener("click",function(){go(prevDay(cur))});
-document.getElementById("upNext").addEventListener("click",function(){go(nextDay(cur))});
+function go(d){cur=d;fill()}
+function shift(n){
+  var p=cur.split("-");
+  var d=new Date(+p[0],+p[1]-1,+p[2]);
+  d.setDate(d.getDate()+n);
+  go(d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()));
+}
+document.getElementById("upPrev").addEventListener("click",function(){shift(-1)});
+document.getElementById("upNext").addEventListener("click",function(){shift(1)});
 document.getElementById("upDate").addEventListener("click",function(){if(cur!==today())go(today())});
+/* 以前的日子 */
 function renderPast(){
-  var list=[],i,rx=/^unprod_(\d{4}-\d{2}-\d{2})$/;
+  var list=[],i,rx=new RegExp("^"+LS+"(\\d{4}-\\d{2}-\\d{2})$");
   for(i=0;i<localStorage.length;i++){
     var k=localStorage.key(i),m=k&&k.match(rx);
     if(m){var o=load(m[1]);if(hasContent(o))list.push({d:m[1],o:o})}
@@ -294,26 +411,14 @@ function renderPast(){
     el.appendChild(b);
   });
 }
+/* 跨零点：正在打字先落盘再翻 */
 setInterval(function(){
   if(cur!==today()){
     var ae=document.activeElement;
-    if(ae&&(ae.classList.contains("up-f"))){persist();go(today())}
+    if(ae&&(ae.classList.contains("up-ta"))){persist();go(today())}
     else{fill()}
   }
 },60000);
-/* 首次引导：还不曾有记录时 */
-(function(){
-  var has=false;
-  for(var i=0;i<localStorage.length;i++){if(/^unprod_/.test(localStorage.key(i)||"")){has=true;break}}
-  if(!has){
-    var t=document.createElement("div");
-    t.className="up-firsttip";
-    t.innerHTML="点贴纸里的空白处，写点什么 ✎<br><span>写字、画画、或空着——都行</span>";
-    document.querySelector(".up-board").before(t);
-    setTimeout(function(){t.classList.add("go")},4200);
-    setTimeout(function(){t.remove()},4800);
-  }
-})();
 fill();
 })();
 </script>
