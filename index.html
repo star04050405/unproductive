@@ -7,213 +7,214 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon-180.png">
-<meta name="theme-color" content="#FFF9F1">
+<meta name="theme-color" content="#FBF6EC">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%}
 body{
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue","Segoe UI",sans-serif;
-  background:#FFF9F1;color:#2E2A24;line-height:1.8;letter-spacing:.01em;padding-bottom:70px;
+  background:#FBF6EC;
+  background-image:radial-gradient(#E9DFCB 1.05px,transparent 1.05px);
+  background-size:24px 24px;
+  color:#2E2A24;line-height:1.8;letter-spacing:.01em;padding-bottom:70px;
 }
-.wrap{max-width:560px;margin:0 auto;padding:0 18px}
-.up-en{font-family:"Courier New",Courier,monospace;letter-spacing:.08em}
+.wrap{max-width:520px;margin:0 auto;padding:0 18px}
+.up-en{font-family:"Courier New",Courier,monospace;letter-spacing:.09em}
 .up-kai{font-family:"Kaiti SC","STKaiti","KaiTi","楷体","PingFang SC",serif}
-img{display:block;max-width:100%}
-/* ===== hero 官图 ===== */
-.up-hero{margin:14px 0 4px;border-radius:10px;overflow:hidden;border:2.5px solid #2E2A24}
-.up-hero img{width:100%}
-.up-hero-cap{text-align:center;padding:10px 6px 2px}
-.up-hero-cap .zh{font-size:14.5px;color:#5B5548}
-.up-hero-cap .zh b{color:#2E2A24}
-.up-hero-cap .en{font-size:11.5px;color:#A39B8C;margin-top:2px}
+/* ===== hero ===== */
+.up-hero{padding:34px 0 20px;text-align:center}
+.up-todo{font-weight:900;font-size:30px;letter-spacing:.04em;line-height:1.3}
+.up-todo .strike{position:relative;color:#C9BFAD;white-space:nowrap}
+.up-todo .strike::after{content:"";position:absolute;left:-3%;right:-3%;top:52%;height:3.5px;background:#E2843B;border-radius:3px;transform:rotate(-2.5deg)}
+.up-todo .feel{color:#2E2A24}
+.up-todo .arrow{color:#B9AE9A;font-weight:400;margin:0 6px}
+.up-hero .zh{margin-top:14px;font-size:17px;color:#4A443B}
+.up-hero .zh b{color:#E2843B;font-weight:600}
+.up-hero .en{margin-top:4px;font-size:11.5px;color:#A79C87;text-transform:lowercase}
+.up-hero .brand{margin-top:18px;font-size:12px;color:#8A7F6C;letter-spacing:.2em}
 /* ===== 日期条 ===== */
-.up-daybar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:16px 0 12px}
-.up-daybtn{border:2px solid #2E2A24;background:#FFF9F1;border-radius:14px 4px 12px 6px/6px 12px 4px 14px;width:44px;height:44px;font-size:19px;font-weight:800;color:#2E2A24;cursor:pointer;line-height:1;transition:transform .15s}
-.up-daybtn:active{transform:scale(.92)}
-.up-date{flex:1;text-align:center;cursor:pointer;padding:2px 0}
-.up-date .d{font-size:24px;font-weight:800;color:#2E2A24;font-variant-numeric:tabular-nums}
-.up-date .w{font-size:12px;color:#F37021;font-weight:700}
-.up-date.today .w::after{content=" · 今天";color:#A39B8C;font-weight:400}
-/* ===== 纸页官图+叠层 ===== */
-.up-sheet{position:relative;border-radius:10px;overflow:hidden;box-shadow:4px 6px 18px rgba(46,42,36,.16)}
-.up-sheet img.page{width:100%}
-.up-layer{position:absolute;inset:0}
-.up-f{position:absolute;border:none;outline:none;background:transparent;resize:none;
-  font-family:inherit;font-size:16px;line-height:1.7;color:#39352C;caret-color:#F37021;
-  padding:2px 4px;overflow:hidden;
+.up-datebar{display:flex;align-items:center;justify-content:center;gap:14px;margin:8px 0 22px}
+.up-nav{width:38px;height:38px;border-radius:50% 46% 52% 48%/48% 52% 46% 54%;border:2px solid #2E2A24;background:#FFFDF7;font-size:17px;color:#2E2A24;font-family:inherit;cursor:pointer}
+.up-nav:active{transform:scale(.92)}
+.up-dbox{text-align:center;min-width:118px}
+.up-dbox .d{font-size:23px;font-weight:800;letter-spacing:.03em}
+.up-dbox .w{font-size:11px;color:#8A7F6C;margin-top:-3px}
+.up-dbox .w.today-tag{color:#E2843B}
+/* ===== 贴纸模块 ===== */
+.up-board{display:flex;flex-direction:column;gap:26px}
+/* 首次引导 */
+.up-firsttip{
+  text-align:center;font-size:15px;color:#7A6F5D;margin:2px 0 12px;line-height:1.7;
+  animation:tipin .5s;transition:opacity .55s
 }
-.up-f::placeholder{color:#B9BFA5;opacity:.85}
-.up-f.t{line-height:1.62}
-/* 情绪格圈选 */
-.up-m{position:absolute;width:8.6%;height:11.5%;cursor:pointer;padding:0;border:none;background:transparent}
-.up-m .ring{position:absolute;inset:-4% -8%;border:2.6px solid #F37021;border-radius:54% 46% 58% 50%/64% 58% 68% 62%;transform:rotate(-4deg);opacity:0;transition:opacity .2s;pointer-events:none}
-.up-m.on .ring{opacity:1;animation:upR .45s ease}
-@keyframes upR{0%{transform:rotate(-4deg) scale(.65);opacity:0}100%{transform:rotate(-4deg) scale(1);opacity:1}}
+.up-firsttip span{font-size:12px;color:#B3A78F}
+.up-firsttip.go{opacity:0}
+@keyframes tipin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.up-st{background:#FFFDF7;padding:9px;border-radius:5px;
+  box-shadow:0 1px 2px rgba(80,70,50,.08),0 6px 16px rgba(80,70,50,.10);
+  border:3px solid #FFFDF7;outline:1px solid rgba(46,42,36,.06);
+  position:relative;transition:transform .25s}
+.up-st .in{position:relative;border-radius:2px;overflow:hidden}
+.up-st img{display:block;width:100%;height:auto}
+.up-st .layer{position:absolute;left:0;top:0;right:0;bottom:0}
+/* 贴纸错落 */
+.up-st.today{width:100%;transform:rotate(-.6deg)}
+.up-st.slow{width:64%;margin-right:auto;transform:rotate(1.1deg)}
+.up-st.think{width:84%;margin-left:auto;transform:rotate(.7deg)}
+.up-st.see{width:66%;margin-right:auto;transform:rotate(-1deg)}
+.up-st.bling{width:100%;transform:rotate(-.45deg)}
+.up-st.mood{width:70%;margin:6px auto 0;transform:rotate(.4deg)}
+/* 输入 */
+.up-f{
+  position:absolute;width:100%;height:100%;resize:none;border:0;outline:0;background:transparent;
+  font-family:"Kaiti SC","STKaiti","KaiTi","楷体","PingFang SC",serif;
+  font-size:16px;line-height:1.7;color:#33302A;padding:6px 8px;caret-color:#E2843B;overflow:hidden;
+}
+.up-f::placeholder{color:rgba(90,82,68,.42)}
+.up-st.focuson{transform:rotate(0) scale(1.012)!important;
+  box-shadow:0 2px 3px rgba(80,70,50,.10),0 10px 22px rgba(80,70,50,.14)}
+.up-st.focuson .up-f{background:rgba(255,222,150,.16);border-radius:4px}
+/* mood 圈选 */
+.up-m{position:absolute;width:33.4%;height:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;background:transparent;border:0}
+.up-m .ring{width:74%;padding-top:74%;position:relative;opacity:0;transform:scale(.7) rotate(-4deg);transition:all .18s}
+.up-m.on .ring{opacity:1;transform:scale(1) rotate(-4deg)}
+.up-m .ring::before{content:"";position:absolute;inset:-6% -9%;border:3px solid #E2843B;border-radius:52% 48% 50% 54%/62% 58% 64% 60%;filter:drop-shadow(0 0 1px rgba(226,132,59,.3))}
+.up-m:active{transform:scale(.94)}
 /* 空页提示 */
-.up-emptyhint{position:absolute;left:50%;top:2.2%;transform:translateX(-50%);
-  background:rgba(255,249,241,.92);border:2px solid #2E2A24;border-radius:14px 6px 16px 8px/8px 16px 6px 14px;
-  padding:6px 14px;font-size:13px;font-weight:700;color:#6E7D57;white-space:nowrap;
-  transition:opacity .3s;z-index:3}
-.up-emptyhint.off{opacity:0;pointer-events:none}
-/* 保存浮标 */
-.up-saved{position:fixed;right:18px;bottom:22px;background:#2E2A24;color:#FFF9F1;font-size:12.5px;padding:8px 14px;border-radius:20px 8px 18px 6px/6px 18px 8px 20px;opacity:0;transform:translateY(8px);transition:opacity .25s,transform .25s;z-index:60;pointer-events:none;font-weight:600}
-.up-saved.on{opacity:1;transform:translateY(0)}
-/* ===== 图区通用 ===== */
-.up-sec{margin-top:34px}
-.up-sec h2{font-size:15px;font-weight:800;color:#2E2A24;margin-bottom:4px}
-.up-sec h2 small{font-weight:400;color:#A39B8C;font-size:12px;margin-left:6px}
-.up-sec .sub{font-size:12.5px;color:#A39B8C;margin-bottom:12px}
-.up-photo{border-radius:10px;overflow:hidden;border:2px solid #2E2A24}
-.up-photo img{width:100%}
-.up-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.up-grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.up-cap{font-size:11.5px;color:#A39B8C;text-align:center;margin-top:6px}
-/* ===== 以前的日子 ===== */
-.up-past h2{font-size:15px;font-weight:800;color:#2E2A24;margin-bottom:10px}
-.up-past h2 small{font-weight:400;color:#A39B8C;font-size:12px;margin-left:6px}
-.up-past-list{display:flex;flex-wrap:wrap;gap:9px}
-.up-past-item{border:2px solid #2E2A24;background:#F2EFD7;border-radius:12px 5px 14px 6px/6px 14px 5px 12px;padding:7px 13px;font-size:13.5px;font-weight:700;color:#2E2A24;cursor:pointer;transition:transform .15s}
-.up-past-item:active{transform:scale(.94)}
-.up-past-item .pv{display:block;font-size:11px;color:#8A9270;font-weight:400;max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.up-emptyhint{text-align:center;margin:-6px 0 24px;font-size:14.5px;color:#A79C87;letter-spacing:.1em;transition:opacity .3s}
+.up-emptyhint.off{opacity:0;height:0;margin:0;overflow:hidden}
+/* 已存浮标 */
+.up-saved{position:fixed;right:18px;bottom:24px;background:#FFFDF7;border:2px solid #2E2A24;border-radius:22px;
+  padding:6px 15px;font-size:12.5px;color:#2E2A24;opacity:0;transform:translateY(8px);transition:all .25s;pointer-events:none;z-index:9}
+.up-saved.on{opacity:1;transform:none}
+.up-saved .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#7FA98C;margin-right:6px}
+/* 以前的日子 */
+.up-past{margin-top:44px}
+.up-past h2,.up-sec h2{font-size:15px;font-weight:700;letter-spacing:.06em;text-align:center;color:#2E2A24;margin-bottom:14px}
+.up-sec h2 small{display:block;font-size:11px;color:#A79C87;font-weight:400;letter-spacing:.18em;margin-top:2px;font-family:"Courier New",monospace}
+.up-past-list{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+.up-past-item{border:2px solid #2E2A24;border-radius:999px;background:#FFFDF7;padding:5px 14px 5px 11px;font-size:13px;cursor:pointer;font-family:inherit;color:#2E2A24}
+.up-past-item .pv{margin-left:7px;color:#A79C87;font-size:11.5px}
+.up-past-item:active{transform:scale(.95)}
+/* 关于 */
+.up-sec{margin-top:44px}
+.up-sec .note{margin:36px 0 8px;text-align:center;font-size:14px;color:#8A7F6C}
+.up-about{background:#FFFDF7;padding:9px;border:3px solid #FFFDF7;outline:1px solid rgba(46,42,36,.06);box-shadow:0 6px 16px rgba(80,70,50,.10);border-radius:5px;transform:rotate(-.3deg)}
+.up-about img{width:100%;height:auto;display:block}
+.up-about img+img{margin-top:8px}
 /* footer */
-.up-foot{margin-top:44px;text-align:center;padding-bottom:8px}
-.up-foot .en{font-size:13px;color:#A39B8C;font-family:"Courier New",Courier,monospace;letter-spacing:.08em;margin-bottom:6px}
-.up-foot .zh{font-size:12.5px;color:#B5AD9C}
-.up-foot .zh b{color:#8A9270;font-weight:600}
+.up-foot{margin-top:46px;text-align:center}
+.up-foot .en{font-size:12.5px;color:#8A7F6C;line-height:2}
+.up-foot .zh{margin-top:8px;font-size:12px;color:#B9AE9A}
+.up-philosophy{margin-top:18px;font-size:13px;color:#8A7F6C;text-align:center}
+.up-philosophy b{color:#E2843B}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <!-- hero -->
+
   <section class="up-hero">
-    <img src="img/1370.webp" alt="To DO To Feel" width="810" height="1080">
-  </section>
-  <div class="up-hero-cap">
-    <div class="zh up-kai">有些事情可以<b>等一等</b>；有些事情自然地发生，<b>就已经足够</b>。</div>
+    <div class="up-todo">
+      <span class="strike">TO DO</span><span class="arrow">→</span><br>
+      <span class="feel">TO FEEL</span>
+    </div>
+    <div class="zh up-kai">有些事情可以等一等；<br>有些事情自然地发生，就已经足够。</div>
     <div class="en up-en">some things can wait. some are already enough.</div>
-  </div>
-
-  <!-- 日期条 -->
-  <div class="up-daybar">
-    <button class="up-daybtn" id="upPrev" aria-label="前一天">‹</button>
-    <div class="up-date" id="upDate" role="button" aria-label="回到今天">
-      <div class="d" id="upD">10.29</div>
-      <div class="w up-en" id="upW">THU</div>
-    </div>
-    <button class="up-daybtn" id="upNext" aria-label="后一天">›</button>
-  </div>
-
-  <!-- 纸页：官图+叠层 -->
-  <div class="up-sheet" id="upSheet">
-    <img class="page" src="img/1376.webp" alt="手册内页" width="1080" height="1080">
-    <div class="up-layer" id="upLayer">
-      <div class="up-emptyhint up-kai" id="upEmptyHint">空着也是一种使用 ✓</div>
-      <textarea class="up-f t" id="f-t" placeholder="嗯，今天……"></textarea>
-      <textarea class="up-f" id="f-sd" placeholder="先放一放"></textarea>
-      <textarea class="up-f" id="f-see" placeholder="今天留意到……"></textarea>
-      <textarea class="up-f" id="f-th" placeholder="一个念头……"></textarea>
-      <div id="upMoodBox"></div>
-      <textarea class="up-f" id="f-bl" placeholder="点亮我的……"></textarea>
-    </div>
-  </div>
-
-  <!-- 氛围图 -->
-  <section class="up-sec">
-    <h2>写字，画画，或空着 <small>随便地书写，用心写</small></h2>
-    <div class="sub up-kai">「可以计划明天，也记录刚刚过去的五分钟。欢迎写满一页，也欢迎空着。」</div>
-    <div class="up-photo"><img src="img/1377.webp" alt="手册使用" width="1080" height="1080"></div>
+    <div class="brand up-en">— THE UNPRODUCTIVE PLANNER —</div>
   </section>
 
-  <!-- 细节三连 -->
-  <section class="up-sec">
-    <div class="up-grid3">
-      <div class="up-photo"><img src="img/1373.webp" alt="今日记录" width="810" height="1080"></div>
-      <div class="up-photo"><img src="img/1374.webp" alt="我看到的" width="810" height="1080"></div>
-      <div class="up-photo"><img src="img/1375.webp" alt="小瞬间" width="810" height="1080"></div>
+  <div class="up-datebar">
+    <button class="up-nav" id="upPrev" aria-label="前一天">‹</button>
+    <div class="up-dbox" id="upDate" role="button" tabindex="0">
+      <div class="d" id="upD">—</div>
+      <div class="w up-en" id="upW">—</div>
     </div>
-    <div class="up-cap up-en">TODAY · SLOW DOWN · I SEE · I THINK · MOOD · A LITTLE BLING</div>
-  </section>
+    <button class="up-nav" id="upNext" aria-label="后一天">›</button>
+  </div>
 
-  <!-- 封面 -->
-  <section class="up-sec">
-    <div class="up-grid2">
-      <div class="up-photo"><img src="img/1371.webp" alt="封面" width="810" height="1080"></div>
-      <div class="up-photo"><img src="img/1372.webp" alt="封面" width="810" height="1080"></div>
-    </div>
-  </section>
+  <div class="up-emptyhint up-kai" id="upEmptyHint">空着也是一种使用 ✓</div>
 
-  <!-- 以前的日子 -->
-  <section class="up-past" id="upPast">
-    <h2>以前的日子 <small>被经历过的，都在</small></h2>
+  <div class="up-board" id="upBoard">
+    <div class="up-st today"><div class="in"><img src="img/m-today.webp" alt="嗯，今天">
+      <div class="layer"><textarea class="up-f" id="f-t" placeholder="今天发生了什么……"></textarea></div></div></div>
+
+    <div class="up-st slow"><div class="in"><img src="img/m-slow.webp" alt="不着急">
+      <div class="layer"><textarea class="up-f" id="f-sd" placeholder="先放一放……"></textarea></div></div></div>
+
+    <div class="up-st think"><div class="in"><img src="img/m-think.webp" alt="一个念头">
+      <div class="layer"><textarea class="up-f" id="f-th" placeholder="冒出来的念头……"></textarea></div></div></div>
+
+    <div class="up-st see"><div class="in"><img src="img/m-see.webp" alt="我看到">
+      <div class="layer"><textarea class="up-f" id="f-see" placeholder="今天留意到……"></textarea></div></div></div>
+
+    <div class="up-st bling"><div class="in"><img src="img/m-bling.webp" alt="小瞬间">
+      <div class="layer"><textarea class="up-f" id="f-bl" placeholder="微小但值得记住的……"></textarea></div></div></div>
+
+    <div class="up-st mood"><div class="in"><img src="img/m-mood.webp" alt="今天是什么心情">
+      <div class="layer"><div id="upMoodBox" style="position:absolute;left:0;top:0;right:0;bottom:0"></div></div></div></div>
+  </div>
+
+  <section class="up-past" id="upPast" style="display:none">
+    <h2>以前的日子 <small class="up-en">DAYS THAT HAPPENED</small></h2>
     <div class="up-past-list" id="upPastList"></div>
   </section>
 
-  <!-- 关于：官方文案图 -->
   <section class="up-sec">
-    <h2>关于这本手册 <small>The Story Behind //</small></h2>
-    <div class="sub">它不负责提高效率，只希望让今天被真正经历。</div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div class="up-photo"><img src="img/1378.webp" alt="品牌故事" width="770" height="1080"></div>
-      <div class="up-photo"><img src="img/1379.webp" alt="如何使用" width="1080" height="934"></div>
-      <div class="up-photo"><img src="img/1380.webp" alt="每一页的组成" width="1080" height="546"></div>
+    <h2>关于这本手册 <small>THE STORY //</small></h2>
+    <div class="up-about">
+      <img src="img/1380.webp" alt="每一页的组成" width="1080" height="546">
+      <img src="img/1379.webp" alt="如何使用" width="1080" height="934">
     </div>
+    <div class="note up-kai">一本「非效率手册」，当然允许你没有效率地使用它。</div>
   </section>
 
   <footer class="up-foot">
-    <div class="en">some things can wait.<br>some are already enough.</div>
-    <div class="zh"><b>非效率手册</b> · 网页版 · 不负责提高效率</div>
+    <div class="en up-en">some things can wait.<br>some are already enough.</div>
+    <div class="zh up-kai">它不负责提高效率，只希望让今天被真正经历。</div>
+    <div class="up-philosophy up-kai">没有待办 · 没有打卡 · 没有完成率 · <b>空着也是一页</b></div>
   </footer>
+
 </div>
-
-<div class="up-saved" id="upSaved">已收好 ✓</div>
-
+<div class="up-saved" id="upSaved"><span class="dot"></span>已存好</div>
 <script>
 (function(){
 var MOODS=[{f:"😊",l:"开心"},{f:"😌",l:"平静"},{f:"🥲",l:"鼻酸"},{f:"😴",l:"想歇"},{f:"😤",l:"有点烦"},{f:"✨",l:"被点亮"}];
-/* 纸页叠层坐标（基于 1376 官图，norm 0-1） */
+/* 各贴纸书写区（贴纸内 norm 坐标，x,y,w,h） */
 var GEO={
-  t:{x:0.552,y:0.30,w:0.372,h:0.225},
-  sd:{x:0.243,y:0.535,w:0.118,h:0.175},
-  see:{x:0.553,y:0.447,w:0.145,h:0.135},
-  th:{x:0.407,y:0.645,w:0.212,h:0.145},
-  bl:{x:0.652,y:0.72,w:0.222,h:0.185},
-  mood:{x:0.737,y:0.5,w:0.202,h:0.16}
+  t:  [0.415,0.352,0.233,0.341],
+  sd: [0.15,0.42,0.7,0.42],
+  th: [0.18,0.13,0.698,0.726],
+  see:[0.238,0.192,0.645,0.555],
+  bl: [0.193,0.072,0.711,0.847],
+  mood:[0.161,0.187,0.735,0.657]
 };
-var FIELDS=["t","sd","see","th","bl"];
-var FID={t:"f-t",sd:"f-sd",see:"f-see",th:"f-th",bl:"f-bl"};
+var FIELDS=["t","sd","th","see","bl"];
+var FID={t:"f-t",sd:"f-sd",th:"f-th",see:"f-see",bl:"f-bl"};
 var WK=["SUN","MON","TUE","WED","THU","FRI","SAT"];
 var cur=today();
 function pad(n){return (n<10?"0":"")+n}
 function today(){var d=new Date();return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
-function key(d){return "unprod_"+d}
-function load(d){try{return JSON.parse(localStorage.getItem(key(d)))||{}}catch(e){return {}}}
-function save(d,o){localStorage.setItem(key(d),JSON.stringify(o))}
+function prevDay(s){var p=s.split("-");var d=new Date(+p[0],+p[1]-1,+p[2]-1);return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function nextDay(s){var p=s.split("-");var d=new Date(+p[0],+p[1]-1,+p[2]+1);return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+function load(d){try{return JSON.parse(localStorage.getItem("unprod_"+d))||{}}catch(e){return{}}}
+function save(d,o){localStorage.setItem("unprod_"+d,JSON.stringify(o))}
 function hasContent(o){return FIELDS.some(function(f){return (o[f]||"").trim()})||(o.mo&&o.mo.length)}
-var saveTimer=null,savedEl=document.getElementById("upSaved");
-function flashSaved(){savedEl.classList.add("on");clearTimeout(saveTimer);saveTimer=setTimeout(function(){savedEl.classList.remove("on")},1400)}
-function persist(){
-  var o=load(cur);
-  FIELDS.forEach(function(f){o[f]=document.getElementById(FID[f]).value});
-  save(cur,o);refreshEmpty();flashSaved();
-}
-var deb=null;
-/* 摆放输入框 */
-FIELDS.forEach(function(f){
-  var el=document.getElementById(FID[f]),g=GEO[f];
-  el.style.left=(g.x*100)+"%";el.style.top=(g.y*100)+"%";
-  el.style.width=(g.w*100)+"%";el.style.height=(g.h*100)+"%";
-  el.addEventListener("input",function(){clearTimeout(deb);deb=setTimeout(persist,500)});
-  el.addEventListener("focusin",function(){
-    setTimeout(function(){try{el.scrollIntoView({block:"center",behavior:"smooth"})}catch(e){}},320);
-  });
+/* 布局输入区 */
+Object.keys(GEO).forEach(function(k){
+  if(k==="mood")return;
+  var el=document.getElementById(FID[k]),g=GEO[k],p=el.parentElement;
+  el.style.left=(g[0]*100)+"%";el.style.top=(g[1]*100)+"%";
+  el.style.width=(g[2]*100)+"%";el.style.height=(g[3]*100)+"%";
 });
-/* 情绪格：在官图表情格位置放 6 个圈选点 */
+/* mood 点阵 */
 var mbox=document.getElementById("upMoodBox"),mg=GEO.mood;
 MOODS.forEach(function(m,i){
-  var b=document.createElement("button");b.className="up-m";
+  var b=document.createElement("button");
+  b.className="up-m";b.type="button";b.setAttribute("data-i",i);
   var col=i%3,row=Math.floor(i/3);
-  b.style.left=((mg.x+col*mg.w/3)*100)+"%";
-  b.style.top=((mg.y+row*mg.h/2)*100)+"%";
+  b.style.left=((mg[0]+col*mg[2]/3)*100)+"%";
+  b.style.top=((mg[1]+row*mg[3]/2)*100)+"%";
+  b.style.width=((mg[2]/3)*100)+"%";b.style.height=((mg[3]/2)*100)+"%";
   b.setAttribute("aria-label",m.l);
   b.innerHTML='<div class="ring"></div>';
   b.addEventListener("click",function(ev){
@@ -221,8 +222,7 @@ MOODS.forEach(function(m,i){
     var o=load(cur);o.mo=o.mo||[];
     var idx=o.mo.indexOf(i);
     if(idx>=0)o.mo.splice(idx,1);else o.mo.push(i);
-    save(cur,o);
-    updateMood(o.mo);refreshEmpty();flashSaved();
+    save(cur,o);updateMood(o.mo);refreshEmpty();flashSaved();
   });
   mbox.appendChild(b);
 });
@@ -235,27 +235,45 @@ function refreshEmpty(){
   var o=load(cur);
   document.getElementById("upEmptyHint").classList.toggle("off",hasContent(o));
 }
+var deb=null;
+function persist(){
+  var o=load(cur);
+  FIELDS.forEach(function(f){o[f]=document.getElementById(FID[f]).value});
+  save(cur,o);renderPast();
+}
+FIELDS.forEach(function(f){
+  var el=document.getElementById(FID[f]);
+  el.addEventListener("input",function(){
+    clearTimeout(deb);
+    deb=setTimeout(function(){persist();flashSaved()},500);
+  });
+  el.addEventListener("focus",function(){
+    el.closest(".up-st").classList.add("focuson");
+    setTimeout(function(){el.scrollIntoView({block:"center",behavior:"smooth"})},320);
+  });
+  el.addEventListener("blur",function(){
+    el.closest(".up-st").classList.remove("focuson");
+  });
+});
+function flashSaved(){
+  var s=document.getElementById("upSaved");
+  s.classList.add("on");clearTimeout(s._t);
+  s._t=setTimeout(function(){s.classList.remove("on")},1400);
+}
 function fill(){
   var o=load(cur);
   FIELDS.forEach(function(f){document.getElementById(FID[f]).value=o[f]||""});
-  updateMood(o.mo);
-  refreshEmpty();
+  updateMood(o.mo);refreshEmpty();
   var parts=cur.split("-"),dd=new Date(+parts[0],+parts[1]-1,+parts[2]);
-  document.getElementById("upD").textContent=(+parts[1])+"."+(+parts[2])+" "+(dd.getFullYear()!==new Date().getFullYear()?"’"+String(dd.getFullYear()).slice(2):"");
-  document.getElementById("upW").textContent=WK[dd.getDay()];
-  document.getElementById("upDate").classList.toggle("today",cur===today());
-  renderPast();
+  document.getElementById("upD").textContent=(+parts[1])+"."+(+parts[2]);
+  var w=document.getElementById("upW");
+  w.textContent=WK[dd.getDay()];
+  w.classList.toggle("today-tag",cur===today());
 }
 function go(d){cur=d;fill();window.scrollTo({top:0,behavior:"auto"})}
-function shift(n){
-  var p=cur.split("-"),d=new Date(+p[0],+p[1]-1,+p[2]);
-  d.setDate(d.getDate()+n);
-  go(d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()));
-}
-document.getElementById("upPrev").addEventListener("click",function(){shift(-1)});
-document.getElementById("upNext").addEventListener("click",function(){shift(1)});
+document.getElementById("upPrev").addEventListener("click",function(){go(prevDay(cur))});
+document.getElementById("upNext").addEventListener("click",function(){go(nextDay(cur))});
 document.getElementById("upDate").addEventListener("click",function(){if(cur!==today())go(today())});
-/* 以前的日子 */
 function renderPast(){
   var list=[],i,rx=/^unprod_(\d{4}-\d{2}-\d{2})$/;
   for(i=0;i<localStorage.length;i++){
@@ -278,13 +296,24 @@ function renderPast(){
 }
 setInterval(function(){
   if(cur!==today()){
-    /* 正在打字时不打扰：先落盘再翻 */
     var ae=document.activeElement;
-    if(ae&&(ae.classList.contains("up-f"))){
-      persist();go(today());
-    }else{fill()}
+    if(ae&&(ae.classList.contains("up-f"))){persist();go(today())}
+    else{fill()}
   }
 },60000);
+/* 首次引导：还不曾有记录时 */
+(function(){
+  var has=false;
+  for(var i=0;i<localStorage.length;i++){if(/^unprod_/.test(localStorage.key(i)||"")){has=true;break}}
+  if(!has){
+    var t=document.createElement("div");
+    t.className="up-firsttip";
+    t.innerHTML="点贴纸里的空白处，写点什么 ✎<br><span>写字、画画、或空着——都行</span>";
+    document.querySelector(".up-board").before(t);
+    setTimeout(function(){t.classList.add("go")},4200);
+    setTimeout(function(){t.remove()},4800);
+  }
+})();
 fill();
 })();
 </script>
